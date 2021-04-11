@@ -2,11 +2,15 @@ import React from "react";
 import './App.scss'
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
+import Lightbox from "react-image-lightbox";
+import "react-image-lightbox/style.css";
 
 let Grid = () => {
-  // Hooks for images,loading
+  // Hooks for images,loading,lightbox, lightbox-index
   const [images, setImages] = React.useState([]);
   const [loaded, setIsLoaded] = React.useState(false);
+  const [open, setIsOpen] = React.useState(false); //lightbox
+  const [photoIndex, setPhotoIndex] = React.useState(0);
 
   //div for images
   const UnsplashImage = ({ url, key }) => (
@@ -67,6 +71,22 @@ let Grid = () => {
             : ""}
         </div>
       </InfiniteScroll>
+
+      {/* open lightbox on image clicked */}
+      {open && (
+            <Lightbox
+              mainSrc={images[photoIndex].urls.regular}
+              nextSrc={images[photoIndex].urls.regular}
+              prevSrc={images[photoIndex].urls.regular}
+              onCloseRequest={() => setIsOpen(false)}
+              onMovePrevRequest={() =>
+                setPhotoIndex((photoIndex + images.length - 1) % images.length)
+              }
+              onMoveNextRequest={() =>
+                setPhotoIndex((photoIndex + 1) % images.length)
+              }
+            />
+          )}
     </div>
   );
 };
