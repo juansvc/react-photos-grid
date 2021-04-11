@@ -4,8 +4,16 @@ import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 let Grid = () => {
-  // Hooks for images
+  // Hooks for images,loading
   const [images, setImages] = React.useState([]);
+  const [loaded, setIsLoaded] = React.useState(false);
+
+  //div for images
+  const UnsplashImage = ({ url, key }) => (
+    <div className="image-item" key={key} >
+      <img src={url} onClick={() => setIsOpen(true)}/>
+    </div>
+  );
 
   React.useEffect(() => {
     fetchImages();
@@ -23,8 +31,6 @@ let Grid = () => {
       .then(res => {
         setImages([...images, ...res.data]);
         setIsLoaded(true);
-
-        console.log(images);
       });
   };
 
@@ -37,7 +43,31 @@ let Grid = () => {
         </h1>
         <small>By <a href="https://juansvc.netlify.app" target="_blank">@juansvc</a></small>
 
-      </div>
+      {/* Infinityscroll every 5 images */}
+      <InfiniteScroll
+        dataLength={images}
+        next={() => fetchImages(5)}
+        hasMore={true}
+        loader={
+          <img
+            src="https://cdn.dribbble.com/users/563824/screenshots/3907093/escalade.gif"
+            alt="loading"
+          />
+        }
+      >
+        <div className="image-grid" style={{ marginTop: "30px" }}>
+          {/* map images on loaded fetch axios request */}
+          {loaded
+            ? images.map((image, index) => (
+                <UnsplashImage
+                  url={image.urls.regular}
+                  key={index}
+                />
+              ))
+            : ""}
+        </div>
+      </InfiniteScroll>
+    </div>
   );
 };
 
