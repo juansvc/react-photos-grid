@@ -1,0 +1,9 @@
+{
+  "name": "reelgood-assignment",
+  "version": "1.0.0",
+  "description": "Reelgood front-end dev team assignment",
+  "main": "index.js",
+  "repository": "https://github.com/juansvc/reelgood-assignment.git",
+  "author": "Juan Vivanco <juansebastianvc@gmail.com>",
+  "license": "MIT"
+}
