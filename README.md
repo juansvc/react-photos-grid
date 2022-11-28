@@ -1,4 +1,4 @@
-# Reelgood Front End Assignment
+# React photos grid
 
 1. yarn install
 2. yarn build
