@@ -41,7 +41,6 @@ let Grid = () => {
   return (
     <div className="container">
         {/* Some text */}
-        <h2>Reelgood front-end dev team assignment</h2>
         <h1>
           Grid of photos 
         </h1>
